@@ -17,8 +17,8 @@ function Menu() {
       cards.length ? <Cards/>
       :
       <div className='div'>
-      <div className='menu' onClick={()=>menuCard(10)}>10 Card</div>
-      <div  className='menu' onClick={()=>menuCard(20)}>20 Card</div>
+      <div className='menu' onClick={()=>menuCard(20)}>20 Card</div>
+      <div  className='menu' onClick={()=>menuCard(30)}>30 Card</div>
       <div className='menu' onClick={()=>menuCard(40)}>40 Card</div>
     </div>
     }

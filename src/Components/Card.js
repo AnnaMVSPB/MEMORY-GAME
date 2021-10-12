@@ -19,7 +19,7 @@ function Card({ el }) {
       {
         el.st 
           ? <div className="square">{el.img}</div> 
-          : <div onClick={() => handleClick(el)} className='sguareFalse'></div>
+          : <div onClick={() => handleClick(el)} className='sguareFalse'><div className='rub'></div></div>
       }
     </div>
  
