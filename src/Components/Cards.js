@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Card from './Card';
 
 function Cards() {
-  const scroll = useSelector((state) => state.Scroll)
+  const scroll = useSelector((state) => state.cards)
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -11,6 +11,7 @@ function Cards() {
       type: 'DOWNLOAD_PAGE',
     })
   }, [dispatch]);
+
 
   return (
     <div className='div'>

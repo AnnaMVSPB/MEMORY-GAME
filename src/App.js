@@ -1,13 +1,14 @@
 
 import { Provider } from 'react-redux';
 import './App.css';
-import Cards from './Components/Cards';
+import Menu from './Components/Menu';
 import store from './Components/redux/store';
 
 function App() {
   return (
     <Provider store={store}>
- <Cards/>
+      <Menu/>,
+ 
     </Provider>
   );
 }

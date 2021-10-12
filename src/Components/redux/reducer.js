@@ -4,73 +4,97 @@ import Scroll from "../ Scroll";
 const initialState = {
   Scroll,
   arr: [],
-
+  cards:[]
 }
 
 function reducer(state = initialState, action) {
   switch (action.type) {
-    case 'DOWNLOAD_PAGE':
-      const arr = [...Scroll]
-      let j, temp;
-      for (let i = arr.length - 1; i > 0; i--) {
-        j = Math.floor(Math.random() * (i + 1))
-        temp = arr[j]
-        arr[j] = arr[i]
-        arr[i] = temp
-      }
+    case 'CHOICE_QUANTITY':
+      let copyScrollNumberc= [...Scroll]
+      const arrCopyScrollNumberc=copyScrollNumberc.slice(-action.payload/2)
       return {
         ...state,
-        Scroll: arr
+        cards: arrCopyScrollNumberc
+      }
+    case 'DOWNLOAD_PAGE':
+      const arr = [...state.cards]
+      let j, temp;
+     
+      let num=0
+     let cardArr=[]
+      arr.forEach((el,i)=>{
+       num +=1
+       cardArr.push({
+          id:num,
+          img: el,
+          name: i,
+          st: false,
+          st2: true,
+        })
+        num+=1
+        cardArr.push( {
+           id:num,
+          img: el,
+          name: i,
+          st: false,
+          st2: true,
+        })
+   
+      })
+      for (let i = cardArr.length - 1; i > 0; i--) {
+        j = Math.floor(Math.random() * (i + 1))
+        temp = cardArr[j]
+        cardArr[j] = cardArr[i]
+        cardArr[i] = temp
+      }
+      console.log(cardArr)
+      return {
+        ...state,
+        cards: cardArr
 
       };
     case 'CHANGE_STATUS':
       let arrScroll
       let arrScroll2
-      const copyScroll = [...state.Scroll]
+      const copyScroll = [...state.cards]
       copyScroll.forEach(el => {
-        if (el.id === action.payload) {
+        if (el.id === action.payload.id) {
           el.st = true
         }
       })
+
       state.arr.push(action.payload)
       if (state.arr.length === 2) {
-        arrScroll = copyScroll.filter(el => el.st === true && el.st2 === true)
+        arrScroll = [...state.arr]
         if (arrScroll[0].name === arrScroll[1].name) {
-          copyScroll.map(el => {
+          copyScroll.forEach(el => {
             if (el.id === arrScroll[0].id || el.id === arrScroll[1].id) {
               el.st2 = false
               state.arr = []
             }
 
           })
-          // } else {
-          //   
-          // }
+
         }
       }
       if (state.arr.length === 3) {
         let copyCopy=[...state.arr]
         let copyArr = copyCopy.slice(0, 2)
-        console.log('copy',copyArr)
-        arrScroll2 = copyScroll.filter(el => el.id === copyArr[0] || el.id === copyArr[1]
+        arrScroll2 = copyScroll.filter(el => el.id === copyArr[0].id || el.id === copyArr[1].id
         )
-        console.log(arrScroll2)
-        copyScroll.map(el => {
+        copyScroll.forEach(el => {
               if (el.id === arrScroll2[0].id || el.id === arrScroll2[1].id) {
                 el.st = false
                 state.arr = copyCopy.slice(2)
-
-                console.log('конец', state.arr)
               }
             })
       }
 
       return {
         ...state,
-        Scroll: copyScroll
+        cards: copyScroll
       };
-    // case 'COMPARISON_OF_SQUARES':
-
+  
 
     default:
       return state;
