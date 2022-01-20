@@ -4,6 +4,7 @@ import Card from './Card';
 
 function Cards() {
   const scroll = useSelector((state) => state.cards)
+  const counter = useSelector((state) => state.counter)
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -12,11 +13,13 @@ function Cards() {
     })
   }, [dispatch]);
 
-
   return (
-    <div className='div'>
+    <>
+    <div className='counter'>Колличество ваших ходов: {counter}</div>
+    <div className='cards flex'>
       {scroll.map((el, i) => <Card el={el} key={`Cards-${i}`} />)}
     </div>
+    </>
   )
 }
 

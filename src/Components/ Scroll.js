@@ -19,7 +19,6 @@ const scroll = [
   <img src='/picture/утя.jpg'/>,
   <img src='/picture/единорог.jpg'/>,
   <img src='/picture/пончики.jpg'/>,
-  
 ]
 
 export default scroll;
